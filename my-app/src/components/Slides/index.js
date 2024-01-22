@@ -15,8 +15,8 @@ function App() {
 
   return (
     <>
-      {slide % 2 === 0 && <Slide1 />}
-      {slide % 2 === 1 && <Slide2 />}
+      {slide % 2 === 0 && <Slide2 />}
+      {slide % 2 === 1 && <Slide1 />}
     </>
   );
 }
