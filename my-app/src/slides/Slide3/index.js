@@ -3,7 +3,7 @@ import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
 import "./style.css";
-import slide1Material from "./Materials";
+import slide3Material from "./Materials";
 
 function Background() {
   const { viewport } = useThree();
@@ -51,12 +51,12 @@ function Background() {
         position={[viewport.width * 0.45, -viewport.height * 0.44, 0]}
       >
         <div className="s1__slide__number">
-          1 <span className="s1__slide__number__small">/ 20</span>
+          3 <span className="s1__slide__number__small">/ 20</span>
         </div>
       </Html>
       <mesh position={[0, 0, 0]}>
         <planeGeometry args={[viewport.width, viewport.height, 32, 32]} />
-        <slide1Material ref={ref} iResolution={[size.width, size.height, 1]} />
+        <slide3Material ref={ref} iResolution={[size.width, size.height, 1]} />
       </mesh>
     </>
   );

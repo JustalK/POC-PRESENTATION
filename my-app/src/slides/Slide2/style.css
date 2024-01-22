@@ -22,3 +22,26 @@
     width: 750px;
     color: rgb(255, 255, 255);
 }
+
+.s2__t1 {
+    font-size: 18px;
+    width: 750px;
+    color: rgb(255, 255, 255);
+    margin-left: 16px;
+}
+
+.s2__folder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.s2__line {
+    position: absolute;
+    background: white;
+    height: 30px;
+    width: 2px;
+    top: calc(-100% - 10px);
+    left: 13px;
+}

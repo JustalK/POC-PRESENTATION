@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
 
-export default class NoiseMaterial extends THREE.ShaderMaterial {
+export default class Slide3Material extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
@@ -19,13 +19,7 @@ export default class NoiseMaterial extends THREE.ShaderMaterial {
         uniform float iTime;
         uniform vec3 iResolution;
 
-        vec3 bgColor = vec3(0.01, 0.16, 0.42);
-        vec3 rectColor = vec3(0.01, 0.26, 0.57);
-
-        //noise background
-        const float noiseIntensity = 2.8;
-        const float noiseDefinition = 0.6;
-        const vec2 glowPos = vec2(-2., 0.);
+        vec3 rectColor = vec3(0.1, 0.50, 0.93);
 
         //rectangles
         const float total = 60.;//number of rectangles
@@ -36,58 +30,6 @@ export default class NoiseMaterial extends THREE.ShaderMaterial {
         float random(vec2 co){
             return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
         }
-
-        float noise( in vec2 p )
-        {
-            p*=noiseIntensity;
-            vec2 i = floor( p );
-            vec2 f = fract( p );
-          vec2 u = f*f*(3.0-2.0*f);
-            return mix( mix( random( i + vec2(0.0,0.0) ), 
-                            random( i + vec2(1.0,0.0) ), u.x),
-                        mix( random( i + vec2(0.0,1.0) ), 
-                            random( i + vec2(1.0,1.0) ), u.x), u.y);
-        }
-
-        float fbm( in vec2 uv )
-        {	
-          uv *= 5.0;
-            mat2 m = mat2( 1.6,  1.2, -1.2,  1.6 );
-            float f  = 0.5000*noise( uv ); uv = m*uv;
-            f += 0.2500*noise( uv ); uv = m*uv;
-            f += 0.1250*noise( uv ); uv = m*uv;
-            f += 0.0625*noise( uv ); uv = m*uv;
-            
-          f = 0.5 + 0.5*f;
-            return f;
-        }
-
-        vec3 bg(vec2 uv )
-        {
-            float velocity = iTime/4.6;
-            float intensity = sin(uv.x*1.+velocity*2.)*1.1+1.5;
-            uv.y -= 2.;
-            uv.x -= 2.;
-            vec2 bp = uv+glowPos;
-            uv *= noiseDefinition;
-
-            //ripple
-            float rb = fbm(vec2(uv.x*.5-velocity*.03, uv.y))*.05;
-            //rb = sqrt(rb); 
-            uv += rb;
-
-            //coloring
-            float rz = fbm(uv*.9+vec2(velocity*.35, 0.0));
-            rz *= dot(bp*intensity,bp)+1.2;
-
-            //bazooca line
-            //rz *= sin(uv.x*.5+velocity*.8);
-
-
-            vec3 col = bgColor/(.1-rz);
-            return sqrt(abs(col));
-        }
-
 
         float rectangle(vec2 uv, vec2 pos, float width, float height, float blur) {
             
@@ -106,12 +48,15 @@ export default class NoiseMaterial extends THREE.ShaderMaterial {
         {
           vec2 uv = fragCoord.xy / iResolution.xy * 2. - 1.;
             uv.x *= iResolution.x/iResolution.y;
-            
+            uv = uv * rotate2d( 0.0 );
+            uv.x -= 0.5;
+            uv.y -= 1.3;
+
             //bg
-            vec3 color = bg(uv)*(4.-abs(uv.y*1.));
+            vec3 color = vec3(0, 0, 0);
             
             //rectangles
-            float velX = -iTime/32.;
+            float velX = iTime/32.;
             float velY = iTime/10.;
             for(float i=0.; i<total; i++){
                 float index = i/total;
@@ -153,4 +98,4 @@ export default class NoiseMaterial extends THREE.ShaderMaterial {
   }
 }
 
-extend({ NoiseMaterial });
+extend({ Slide3Material });
