@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import Slide1 from "../../slides/Slide1";
 import Slide2 from "../../slides/Slide2";
 import Slide3 from "../../slides/Slide3";
+import Slide4 from "../../slides/Slide4";
 
 const KEYCODE_RIGHT = 39;
 const KEYCODE_LEFT = 37;
@@ -35,6 +36,7 @@ function App() {
       {slide === 1 && <Slide1 />}
       {slide === 2 && <Slide2 />}
       {slide === 3 && <Slide3 />}
+      {slide === 4 && <Slide4 />}
     </>
   );
 }

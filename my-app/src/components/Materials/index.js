@@ -1,12 +1,15 @@
 import * as THREE from "three";
 import { extend } from "@react-three/fiber";
 
-export default class Slide3Material extends THREE.ShaderMaterial {
+export default class SlideMaterial extends THREE.ShaderMaterial {
   constructor() {
     super({
       uniforms: {
         iTime: { value: 0.0 },
         iResolution: new THREE.Vector3(),
+        angle: { value: 0.0 },
+        x: { value: 0.0 },
+        y: { value: 0.0 },
       },
       vertexShader: `
       varying vec2 vUv;
@@ -18,6 +21,9 @@ export default class Slide3Material extends THREE.ShaderMaterial {
       fragmentShader: `
         uniform float iTime;
         uniform vec3 iResolution;
+        uniform float angle;
+        uniform float x;
+        uniform float y;
 
         vec3 rectColor = vec3(0.1, 0.50, 0.93);
 
@@ -48,9 +54,9 @@ export default class Slide3Material extends THREE.ShaderMaterial {
         {
           vec2 uv = fragCoord.xy / iResolution.xy * 2. - 1.;
             uv.x *= iResolution.x/iResolution.y;
-            uv = uv * rotate2d( 0.0 );
-            uv.x -= 0.5;
-            uv.y -= 1.3;
+            uv = uv * rotate2d( angle );
+            uv.x -= x;
+            uv.y -= y;
 
             //bg
             vec3 color = vec3(0, 0, 0);
@@ -81,6 +87,30 @@ export default class Slide3Material extends THREE.ShaderMaterial {
     });
   }
 
+  get angle() {
+    return this.uniforms.angle.value;
+  }
+
+  set angle(v) {
+    return (this.uniforms.angle.value = v);
+  }
+
+  get x() {
+    return this.uniforms.x.value;
+  }
+
+  set x(v) {
+    return (this.uniforms.x.value = v);
+  }
+
+  get y() {
+    return this.uniforms.y.value;
+  }
+
+  set y(v) {
+    return (this.uniforms.y.value = v);
+  }
+
   get iTime() {
     return this.uniforms.iTime.value;
   }
@@ -98,4 +128,4 @@ export default class Slide3Material extends THREE.ShaderMaterial {
   }
 }
 
-extend({ Slide3Material });
+extend({ SlideMaterial });

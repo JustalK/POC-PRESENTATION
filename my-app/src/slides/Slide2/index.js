@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import "./style.css";
 // eslint-disable-next-line
-import slide2Material from "./Materials";
+import slideMaterial from "../../components/Materials";
 
 function Background() {
   const [show, setShow] = useState(false);
@@ -137,7 +137,13 @@ function Background() {
       </Html>
       <mesh position={[0, 0, 0]}>
         <planeGeometry args={[viewport.width, viewport.height, 32, 32]} />
-        <slide2Material ref={ref} iResolution={[size.width, size.height, 1]} />
+        <slideMaterial
+          ref={ref}
+          iResolution={[size.width, size.height, 1]}
+          angle={-0.35}
+          x={0.5}
+          y={0.35}
+        />
       </mesh>
     </>
   );

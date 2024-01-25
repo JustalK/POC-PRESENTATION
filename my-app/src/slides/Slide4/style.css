@@ -1,0 +1,35 @@
+.s1__title1,
+.s1__title2,
+.s1__title3 {
+  color: rgb(96, 205, 238);
+  width: 750px;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+.s1__title2 {
+    color: rgb(255, 255, 255);
+}
+
+.s1__who {
+    font-size: 20px;
+    width: 750px;
+    color: rgb(255, 255, 255);
+}
+
+.s1__slide__number {
+    font-size: 30px;
+    width: 750px;
+    color: rgb(255, 255, 255);
+}
+
+.s1__slide__number__small {
+    font-size: 14px;
+}
+
+.s3__date {
+    font-size: 100px;
+    color: white;
+    transform: translate(-50%, -50%) !important;
+    width: 904px;
+}

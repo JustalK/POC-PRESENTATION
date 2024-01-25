@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import { useFrame, useThree, useLoader } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import * as THREE from "three";
 import "./style.css";
-import slide1Material from "./Materials";
+// eslint-disable-next-line
+import slideMaterial from "../../components/Materials";
 
 function Background() {
   const { viewport } = useThree();
@@ -56,7 +56,13 @@ function Background() {
       </Html>
       <mesh position={[0, 0, 0]}>
         <planeGeometry args={[viewport.width, viewport.height, 32, 32]} />
-        <slide1Material ref={ref} iResolution={[size.width, size.height, 1]} />
+        <slideMaterial
+          ref={ref}
+          iResolution={[size.width, size.height, 1]}
+          angle={0.0}
+          x={0.0}
+          y={0.0}
+        />
       </mesh>
     </>
   );
