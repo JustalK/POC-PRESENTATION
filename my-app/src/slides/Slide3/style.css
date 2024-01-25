@@ -23,13 +23,20 @@
     color: rgb(255, 255, 255);
 }
 
-.s1__slide__number__small {
-    font-size: 14px;
+.s3__title {
+    font-size: 60px;
+    width: 750px;
+    color: rgb(96, 205, 238);
+    margin-left: 16px;
 }
 
 .s3__date {
-    font-size: 100px;
+    font-size: 60px;
     color: white;
     transform: translate(-50%, -50%) !important;
-    width: 904px;
+    width: 543px;
+}
+
+.s1__slide__number__small {
+    font-size: 14px;
 }

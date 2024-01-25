@@ -10,7 +10,7 @@ function Background() {
   const ref = useRef();
   const { size } = useThree();
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     ref.current.iTime += delta;
   });
 

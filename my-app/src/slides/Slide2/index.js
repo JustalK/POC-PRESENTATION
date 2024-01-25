@@ -5,7 +5,7 @@ import "./style.css";
 // eslint-disable-next-line
 import slideMaterial from "../../components/Materials";
 
-function Background() {
+function Slide() {
   const [show, setShow] = useState(false);
   const [menu1, setMenu1] = useState(false);
   const [menu2, setMenu2] = useState(false);
@@ -20,7 +20,7 @@ function Background() {
   useEffect(() => {
     setTimeout(() => {
       setShow(true);
-    }, 500);
+    }, 250);
   }, []);
 
   const handleMouseOver = (setMenu) => {
@@ -35,7 +35,7 @@ function Background() {
     <>
       <Html
         className={show ? "s2__block s2__show" : "s2__block s2__hide"}
-        position={[-viewport.width * 0.325, viewport.height * 0.1, 0]}
+        position={[-viewport.width * 0.3, viewport.height * 0.1, 0]}
       >
         <img
           className="link"
@@ -67,7 +67,7 @@ function Background() {
       )}
       <Html
         className={show ? "s2__block s2__show" : "s2__block s2__hide"}
-        position={[-viewport.width * 0.175, viewport.height * 0.1, 0]}
+        position={[-viewport.width * 0.15, viewport.height * 0.1, 0]}
       >
         <img
           className="link"
@@ -110,7 +110,7 @@ function Background() {
       )}
       <Html
         className={show ? "s2__block s2__show" : "s2__block s2__hide"}
-        position={[-viewport.width * 0.025, viewport.height * 0.1, 0]}
+        position={[-viewport.width * 0.0, viewport.height * 0.1, 0]}
       >
         <img className="link" src="./yarn.png" alt="yarn" />
       </Html>
@@ -149,4 +149,4 @@ function Background() {
   );
 }
 
-export default Background;
+export default Slide;

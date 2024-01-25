@@ -22,4 +22,5 @@ code {
 
 .link {
   cursor: pointer;
+  transform: translateX(-50%);
 }

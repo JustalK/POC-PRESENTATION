@@ -7,77 +7,19 @@ import slideMaterial from "../../components/Materials";
 
 const KEYCODE_SPACE = 32;
 
-function Background() {
-  const [action, setAction] = useState(0);
-  const [year, setYear] = useState(new Date());
+function Slide() {
   const { viewport } = useThree();
   const ref = useRef();
-  const refTimer = useRef();
-  const refTimerReverse = useRef();
   const { size } = useThree();
 
-  const registerKeyPress = useCallback(
-    (e) => {
-      switch (action) {
-        case 0:
-          clearInterval(refTimer.current);
-          break;
-        case 1:
-          comeBackInTime();
-          break;
-        default:
-          clearInterval(refTimerReverse.current);
-      }
-      if (e.keyCode === KEYCODE_SPACE) {
-        setAction((c) => c + 1);
-      }
-    },
-    [action]
-  );
-
   useFrame((_state, delta) => {
-    switch (action) {
-      case 1:
-        ref.current.iTime += 0;
-        break;
-      case 2:
-        ref.current.iTime -= delta * 20;
-        break;
-      default:
-        ref.current.iTime += delta;
-    }
+    ref.current.iTime += delta;
   });
-
-  const comeBackInTime = () => {
-    refTimerReverse.current = setInterval(() => {
-      setYear((prevDate) => new Date(prevDate.getTime() - 1234567891));
-    }, 10);
-  };
-
-  const updateTime = useCallback(() => {
-    refTimer.current = setInterval(
-      () => setYear((prevDate) => new Date(prevDate.getTime() + 1000)),
-      1000
-    );
-  }, []);
-
-  useEffect(() => {
-    if (action === 0 || action > 1) {
-      updateTime();
-    }
-    window.addEventListener("keydown", registerKeyPress);
-
-    // Clean event listener
-    return () => {
-      clearInterval(refTimer.current);
-      window.removeEventListener("keydown", registerKeyPress);
-    };
-  }, [action, registerKeyPress, updateTime]);
 
   return (
     <>
-      <Html className="w-100 s3__date" position={[0, 0, 0]}>
-        {year.toLocaleString()}
+      <Html position={[-viewport.width * 0.42, viewport.height * 0.315, 0]}>
+        <div className="s3__title">What is a package?</div>
       </Html>
       <Html
         className="w-100"
@@ -94,11 +36,11 @@ function Background() {
           iResolution={[size.width, size.height, 1]}
           angle={0.0}
           x={0.5}
-          y={1.3}
+          y={1.35}
         />
       </mesh>
     </>
   );
 }
 
-export default Background;
+export default Slide;
