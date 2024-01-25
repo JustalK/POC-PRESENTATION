@@ -1,50 +1,83 @@
-import React, { useRef } from "react";
-import { useFrame, useThree, useLoader } from "@react-three/fiber";
+import React, { useRef, useEffect, useCallback, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import * as THREE from "three";
 import "./style.css";
+// eslint-disable-next-line
 import slide3Material from "./Materials";
 
+const KEYCODE_SPACE = 32;
+
 function Background() {
+  const [action, setAction] = useState(0);
+  const [year, setYear] = useState(new Date());
   const { viewport } = useThree();
   const ref = useRef();
+  const refTimer = useRef();
+  const refTimerReverse = useRef();
   const { size } = useThree();
 
-  useFrame((state, delta) => {
-    ref.current.iTime += delta;
+  const registerKeyPress = useCallback(
+    (e) => {
+      switch (action) {
+        case 0:
+          clearInterval(refTimer.current);
+          break;
+        case 1:
+          comeBackInTime();
+          break;
+        default:
+          clearInterval(refTimerReverse.current);
+      }
+      if (e.keyCode === KEYCODE_SPACE) {
+        setAction((c) => c + 1);
+      }
+    },
+    [action]
+  );
+
+  useFrame((_state, delta) => {
+    switch (action) {
+      case 1:
+        ref.current.iTime += 0;
+        break;
+      case 2:
+        ref.current.iTime -= delta * 20;
+        break;
+      default:
+        ref.current.iTime += delta;
+    }
   });
+
+  const comeBackInTime = () => {
+    refTimerReverse.current = setInterval(() => {
+      setYear((prevDate) => new Date(prevDate.getTime() - 1234567891));
+    }, 10);
+  };
+
+  const updateTime = useCallback(() => {
+    refTimer.current = setInterval(
+      () => setYear((prevDate) => new Date(prevDate.getTime() + 1000)),
+      1000
+    );
+  }, []);
+
+  useEffect(() => {
+    if (action === 0 || action > 1) {
+      updateTime();
+    }
+    window.addEventListener("keydown", registerKeyPress);
+
+    // Clean event listener
+    return () => {
+      clearInterval(refTimer.current);
+      window.removeEventListener("keydown", registerKeyPress);
+    };
+  }, [action, registerKeyPress, updateTime]);
 
   return (
     <>
-      <Html
-        className="w-100"
-        position={[-viewport.width * 0.45, viewport.height * 0.36, 0]}
-      >
-        <div className="s1__title1">Package Managers</div>
-      </Html>
-      <Html
-        className="w-100"
-        position={[-viewport.width * 0.45, viewport.height * 0.26, 0]}
-      >
-        <div className="s1__title2">&</div>
-      </Html>
-      <Html
-        className="w-100"
-        position={[-viewport.width * 0.39, viewport.height * 0.26, 0]}
-      >
-        <div className="s1__title3">Their secrets</div>
-      </Html>
-      <Html
-        className="w-100"
-        position={[-viewport.width * 0.1, viewport.height * 0.245, 0]}
-      >
-        <div className="s1__who">By Justal Kevin</div>
-      </Html>
-      <Html
-        className="w-100"
-        position={[-viewport.width * 0.1, viewport.height * 0.22, 0]}
-      >
-        <div className="s1__who">On 6 February 2024</div>
+      <Html className="w-100 s3__date" position={[0, 0, 0]}>
+        {year.toLocaleString()}
       </Html>
       <Html
         className="w-100"

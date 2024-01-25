@@ -26,3 +26,10 @@
 .s1__slide__number__small {
     font-size: 14px;
 }
+
+.s3__date {
+    font-size: 100px;
+    color: white;
+    transform: translate(-50%, -50%) !important;
+    width: 904px;
+}

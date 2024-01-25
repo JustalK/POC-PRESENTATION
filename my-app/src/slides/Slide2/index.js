@@ -1,21 +1,27 @@
-import React, { useRef, useState } from "react";
-import { useFrame, useThree, useLoader } from "@react-three/fiber";
+import React, { useRef, useState, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
-import * as THREE from "three";
 import "./style.css";
+// eslint-disable-next-line
 import slide2Material from "./Materials";
 
 function Background() {
+  const [show, setShow] = useState(false);
   const [menu1, setMenu1] = useState(false);
   const [menu2, setMenu2] = useState(false);
-  const [menu3, setMenu3] = useState(false);
   const { viewport } = useThree();
   const ref = useRef();
   const { size } = useThree();
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     ref.current.iTime += delta;
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 500);
+  }, []);
 
   const handleMouseOver = (setMenu) => {
     setMenu(true);
@@ -27,10 +33,14 @@ function Background() {
 
   return (
     <>
-      <Html position={[-viewport.width * 0.325, viewport.height * 0.1, 0]}>
+      <Html
+        className={show ? "s2__block s2__show" : "s2__block s2__hide"}
+        position={[-viewport.width * 0.325, viewport.height * 0.1, 0]}
+      >
         <img
           className="link"
           src="./box.png"
+          alt="box"
           onMouseOver={(_e) => handleMouseOver(setMenu1)}
           onMouseOut={(_e) => handleMouseOut(setMenu1)}
         />
@@ -42,7 +52,7 @@ function Background() {
             position={[-viewport.width * 0.315, -viewport.height * 0.04, 0]}
           >
             <div className="s2__line" />
-            <img src="./folder.png" />
+            <img src="./folder.png" alt="folder" />
             <div className="s2__t1">A bit of my life</div>
           </Html>
           <Html
@@ -50,15 +60,19 @@ function Background() {
             position={[-viewport.width * 0.315, -viewport.height * 0.14, 0]}
           >
             <div className="s2__line" />
-            <img src="./folder.png" />
+            <img src="./folder.png" alt="folder" />
             <div className="s2__t1">What is a Package Manager?</div>
           </Html>
         </>
       )}
-      <Html position={[-viewport.width * 0.175, viewport.height * 0.1, 0]}>
+      <Html
+        className={show ? "s2__block s2__show" : "s2__block s2__hide"}
+        position={[-viewport.width * 0.175, viewport.height * 0.1, 0]}
+      >
         <img
           className="link"
           src="./npm.png"
+          alt="npm"
           onMouseOver={(_e) => handleMouseOver(setMenu2)}
           onMouseOut={(_e) => handleMouseOut(setMenu2)}
         />
@@ -70,7 +84,7 @@ function Background() {
             position={[-viewport.width * 0.155, -viewport.height * 0.04, 0]}
           >
             <div className="s2__line" />
-            <img src="./folder.png" />
+            <img src="./folder.png" alt="folder" />
             <div className="s2__t1">How does it work?</div>
           </Html>
           <Html
@@ -78,7 +92,7 @@ function Background() {
             position={[-viewport.width * 0.155, -viewport.height * 0.14, 0]}
           >
             <div className="s2__line" />
-            <img src="./folder.png" />
+            <img src="./folder.png" alt="folder" />
             <div className="s2__t1">In the black hole</div>
           </Html>
           <Html
@@ -86,7 +100,7 @@ function Background() {
             position={[-viewport.width * 0.155, -viewport.height * 0.24, 0]}
           >
             <div className="s2__line" />
-            <img src="./folder.png" />
+            <img src="./folder.png" alt="folder" />
             <div className="s2__t1">
               The weaknesses: Phantom dependency, Doppelganger and Dependency
               confusion
@@ -94,19 +108,23 @@ function Background() {
           </Html>
         </>
       )}
-      <Html position={[-viewport.width * 0.025, viewport.height * 0.1, 0]}>
-        <img
-          className="link"
-          src="./yarn.png"
-          onMouseOver={(_e) => handleMouseOver(setMenu3)}
-          onMouseOut={(_e) => handleMouseOut(setMenu3)}
-        />
+      <Html
+        className={show ? "s2__block s2__show" : "s2__block s2__hide"}
+        position={[-viewport.width * 0.025, viewport.height * 0.1, 0]}
+      >
+        <img className="link" src="./yarn.png" alt="yarn" />
       </Html>
-      <Html position={[viewport.width * 0.15, viewport.height * 0.1, 0]}>
-        <img className="link" src="./pnpm.png" />
+      <Html
+        className={show ? "s2__block s2__show" : "s2__block s2__hide"}
+        position={[viewport.width * 0.15, viewport.height * 0.1, 0]}
+      >
+        <img className="link" src="./pnpm.png" alt="pnpm" />
       </Html>
-      <Html position={[viewport.width * 0.3, viewport.height * 0.1, 0]}>
-        <img className="link" src="./story.png" />
+      <Html
+        className={show ? "s2__block s2__show" : "s2__block s2__hide"}
+        position={[viewport.width * 0.3, viewport.height * 0.1, 0]}
+      >
+        <img className="link" src="./story.png" alt="story" />
       </Html>
 
       <Html

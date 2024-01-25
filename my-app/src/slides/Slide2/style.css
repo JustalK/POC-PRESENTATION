@@ -45,3 +45,15 @@
     top: calc(-100% - 10px);
     left: 13px;
 }
+
+.s2__hide {
+    opacity: 0;
+}
+
+.s2__show {
+    opacity: 100%;
+}
+
+.s2__block {
+    transition: all 0.5s ease-in-out;
+}

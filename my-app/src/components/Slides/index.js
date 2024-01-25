@@ -9,15 +9,17 @@ const KEYCODE_LEFT = 37;
 function App() {
   const [slide, setSlide] = useState(1);
 
-  const registerKeyPress = useCallback((e) => {
-    if (e.keyCode === KEYCODE_RIGHT) {
-      setSlide((s) => s + 1);
-    }
-    console.log(e.keyCode, slide);
-    if (e.keyCode === KEYCODE_LEFT && slide >= 1) {
-      setSlide((s) => s - 1);
-    }
-  }, []);
+  const registerKeyPress = useCallback(
+    (e) => {
+      if (e.keyCode === KEYCODE_RIGHT) {
+        setSlide((s) => s + 1);
+      }
+      if (e.keyCode === KEYCODE_LEFT && slide >= 1) {
+        setSlide((s) => s - 1);
+      }
+    },
+    [slide]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", registerKeyPress);
