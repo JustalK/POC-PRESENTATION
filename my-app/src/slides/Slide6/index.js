@@ -108,9 +108,9 @@ function Slide() {
         <slideMaterial
           ref={ref}
           iResolution={[size.width, size.height, 1]}
-          angle={0.5}
+          angle={1.1}
           x={0.5}
-          y={2.4}
+          y={-1.2}
         />
       </mesh>
     </>
