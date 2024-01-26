@@ -5,6 +5,7 @@ import Slide4 from "./Slide4";
 import Slide5 from "./Slide5";
 import Slide6 from "./Slide6";
 import Slide7 from "./Slide7";
+import Slide8 from "./Slide8";
 
 // eslint-disable-next-line
 export default {
@@ -15,4 +16,5 @@ export default {
   Slide5,
   Slide6,
   Slide7,
+  Slide8,
 };

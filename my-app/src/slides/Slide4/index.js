@@ -80,7 +80,7 @@ function Slide() {
         <div className="s3__title">A little bit of history</div>
       </Html>
       <Html
-        className="w-100 s3__date"
+        className="w-100 s4__date"
         position={[viewport.width * 0.2, -viewport.height * 0.17, 0]}
       >
         {year.toLocaleString()}
